@@ -9,8 +9,6 @@ const userRoutes = require('./routes/user');
 
 require('dotenv').config();
 
-console.log('mongodb+srv://'+process.env.LOGIN+':'+process.env.PASSWORD+"@"+process.env.URL)
-
 mongoose.connect('mongodb+srv://'+process.env.LOGIN+':'+process.env.PASSWORD+"@"+process.env.URL,
 { useNewUrlParser: true,
   useUnifiedTopology: true })
