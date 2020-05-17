@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');  // We need bodyParser to extract the information from HTTP requests and render it usable
 const mongoose = require('mongoose');  // We'll need the mongoose plugin to connect to the DB
 const path = require('path');  // We'll use the path plugin to upload our images
 const helmet = require('helmet');  // Helmet is a very well rounded security plugin, used for many different reasons
@@ -13,7 +13,8 @@ require('dotenv').config();  // This is used to hide sensitive information regar
 
 mongoose.connect('mongodb+srv://'+process.env.LOGIN+':'+process.env.PASSWORD+"@"+process.env.URL,
 { useNewUrlParser: true,  // As you can see, our login, password and url are all replaced by generic names
-  useUnifiedTopology: true })
+  useUnifiedTopology: true,
+  useCreateIndex: true })
 .then(() => console.log('Connexion à MongoDB réussie !'))
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -28,11 +29,11 @@ app.use((req, res, next) => {  // We declare all the headers to allow :
     next();
   });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json());  // This will parse application/json type POST data
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/api/sauces', sauceRoutes);
-app.use('/api/auth', userRoutes);
+app.use('/api/sauces', sauceRoutes);  // We specify the routes used for both our sauces
+app.use('/api/auth', userRoutes);   // and our users
 
-module.exports = app;
+module.exports = app;  // Our server.js will use all the code in here to make the backend run
