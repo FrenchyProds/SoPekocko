@@ -1,7 +1,7 @@
 const http = require('http');
 const app = require('./app');
 
-const normalizePort = val => {  // This funection will allow us to find a valid port, in number OR string format
+const normalizePort = val => {  // This function will allow us to find a valid port, in number OR string format
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
